@@ -157,6 +157,7 @@ extern u8 HC595_u8WriteByte(u8 Copy_u8DeviceIdx, u8 Copy_u8DataOneByte) { //Send
 	} else {
 		s8 Local_u8LoopIndex; //Take care of that because we loop till zero and we need it
 		for (Local_u8LoopIndex = HC595_u8NUM_BITS_EACH_BYTE; Local_u8LoopIndex >= HC595_u8NUM_ZERO; Local_u8LoopIndex--) {
+			// use the function of GET_BIT(REG,BIT_NUM) instead of the following piece of code
 			if (!(Copy_u8DataOneByte & (HC595_u8NUM_ONE << Local_u8LoopIndex))) { //Output the data on DS line according to the Value of MSB
 				HC595_u8DataLow(Copy_u8DeviceIdx);	//MSB is 0 so output high
 			} else {

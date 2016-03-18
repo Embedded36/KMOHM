@@ -47,7 +47,7 @@ static const u8 TSW_u8SwitchNumArr[TSW_ARRAY_SIZE] = {TSW_u8SWITCH1PIN, TSW_u8SW
 
 /*Comment!: check the switch state Pressed or Released*/
 extern u8 TSW_u8CheckSwitch(u8 Copy_u8SwIdx, u8* Copy_u8PtrVal) {
-	u8 Local_u8RetrunStatus;
+	u8 Local_u8RetrunStatus = u8OK;
 	if ((Copy_u8SwIdx > TSW_CONNECTED_NUM)) {
 		Local_u8RetrunStatus = u8ERROR;
 	} else {
@@ -66,7 +66,6 @@ extern u8 TSW_u8CheckSwitch(u8 Copy_u8SwIdx, u8* Copy_u8PtrVal) {
 				Local_u8SwState[Copy_u8SwIdx] = TSW_u8RELEASED_STATE;
 				*Copy_u8PtrVal = Local_u8SwFlag[Copy_u8SwIdx] = TSW_u8RELEASED;
 			}
-			Local_u8RetrunStatus = u8OK;
 			break;
 		case TSW_u8BOUNCING_STATE:
 			DIO_u8ReadPinVal(TSW_u8SwitchNumArr[Copy_u8SwIdx], &Local_u8SwitchValue);
@@ -86,7 +85,6 @@ extern u8 TSW_u8CheckSwitch(u8 Copy_u8SwIdx, u8* Copy_u8PtrVal) {
 				}
 			}
 			*Copy_u8PtrVal = Local_u8SwFlag[Copy_u8SwIdx];
-			Local_u8RetrunStatus = u8OK;
 			break;
 		case TSW_u8PRESSED_STATE:
 			DIO_u8ReadPinVal(TSW_u8SwitchNumArr[Copy_u8SwIdx], &Local_u8SwitchValue);
@@ -97,12 +95,10 @@ extern u8 TSW_u8CheckSwitch(u8 Copy_u8SwIdx, u8* Copy_u8PtrVal) {
 				Local_u8SwState[Copy_u8SwIdx] = TSW_u8BOUNCING_STATE;
 				*Copy_u8PtrVal = Local_u8SwFlag[Copy_u8SwIdx] = TSW_u8PRESSED;
 			}
-			Local_u8RetrunStatus = u8OK;
 			break;
 		default:
 			Local_u8SwState[Copy_u8SwIdx] = TSW_u8RELEASED_STATE;
 			*Copy_u8PtrVal = TSW_u8RELEASED;
-			Local_u8RetrunStatus = u8OK;
 			break;
 		}
 	}
@@ -114,6 +110,7 @@ extern void TSW_voidInit(void) {
 //	u8 Copy_u8SwIdx;
 //	for (Copy_u8SwIdx = 0; Copy_u8SwIdx < TSW_ARRAY_SIZE; Copy_u8SwIdx++) {
 //		DIO_u8WritePinDir(TSW_u8SwitchNumArr[Copy_u8SwIdx], DIO_u8INPUT);
+//		DIO_u8WritePinVal(TSW_u8SwitchNumArr[Copy_u8SwIdx], DIO_u8HIGH);
 //	}
 }
 

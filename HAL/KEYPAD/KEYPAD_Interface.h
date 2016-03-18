@@ -12,9 +12,9 @@
 /*******************************************************/  
   
   
-/*Comment!: Intialization Function*/
-void Keypad_voidInit(void);
-/*Comment!: Intialization Function*/
+/*Comment!: Initialization Function*/
+extern void KEYPAD_voidInit(void);
+/*Comment!: Initialization Function*/
 extern u8 KEYPAD_u8Read(u8* Copy_u8PtrVal);
   
 #endif  
