@@ -21,9 +21,8 @@
 #define UART_u8UDR			(*(volatile u8*)(0x2C))
 
 /*Comment!: Calculate the value of UBRR Register */
-#define UART_u16UBRR_VALUE ((fOSC/16UL * UART_u32BAUD_RATE) – 1UL)
-/*Comment!:  CPU frequency  */
-#define fOSC	4000000UL
+#define UART_u16UBRR_VALUE ((F_OSC / 16UL / UART_u32BAUD_RATE) - 1UL)
+
 
 /*Comment!: UART Baud Rate Options*/
 #define UART_u32BAUD_RATE_2400		2400UL
@@ -63,10 +62,15 @@
 #define UART_u8_7O2 		0x3C
 #define UART_u8_8O2 		0x3E
 
+
+/*Comment!: RXEN: Receiver Enable */
+#define RXEN				4
+/*Comment!: TXEN: Transmitter Enable */
+#define TXEN				3
 /*Comment!: UART Data Register Empty */
-#define UDRE			5
+#define UDRE				5
 /*Comment!: UART Receive Complete */
-#define RXC				7
+#define RXC					7
 
 
 /*******************************************************/

@@ -58,7 +58,7 @@ extern u8 UART_u8ReceiveOneByte(u8 *Copy_u8Data){
 	/* Wait for data to be received */
 	while (!(GET_BIT(UART_u8UCSRA,RXC)));
 	/* Get and return received data from buffer */
-	*Copy_u8Data = UDR;
+	*Copy_u8Data = UART_u8UDR;
 	return Local_u8Status;
 }
 /*Comment!: Transmit a String to the UART */
