@@ -13,14 +13,14 @@
 /*******************************************************/
 
 /*Comment!: Input ADC Channel*/
-#define ADC_U8CH0		0
-#define ADC_U8CH1		1
-#define ADC_U8CH2		2
-#define ADC_U8CH3		3
-#define ADC_U8CH4		4
-#define ADC_U8CH5		5
-#define ADC_U8CH6		6
-#define ADC_U8CH7		7
+#define ADC_u8CH0		0
+#define ADC_u8CH1		1
+#define ADC_u8CH2		2
+#define ADC_u8CH3		3
+#define ADC_u8CH4		4
+#define ADC_u8CH5		5
+#define ADC_u8CH6		6
+#define ADC_u8CH7		7
 //#define ADC_u8VBG		30 //or 1E
 
 /*Comment!: Digital I/O Direction*/

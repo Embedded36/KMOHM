@@ -33,7 +33,7 @@ extern void ADC_voidDisable(void) {
 /*Comment!: Read ADC on a specific channel, just one shot */
 extern u8 ADC_u8ReadChannel(u8 Copy_u8ChannelNum, u16* Copy_u16ADCValue) {
 	u8 Local_u8Status = u8OK;
-	if (!GET_BIT(ADC_u8ADCSRA,ADEN) || (Copy_u8ChannelNum > ADC_U8CH7)) { // ADC is Disable
+	if (!GET_BIT(ADC_u8ADCSRA,ADEN) || (Copy_u8ChannelNum > ADC_u8CH7)) { // ADC is Disable
 		Local_u8Status = u8ERROR;
 	} else {
 	ADC_u8ADMUX = ((ADC_u8ADMUX & 0xE0) | Copy_u8ChannelNum); // clears the bottom 3 bits before ORing
@@ -49,7 +49,7 @@ extern u8 ADC_u8ReadChannel(u8 Copy_u8ChannelNum, u16* Copy_u16ADCValue) {
 /*Comment!: Read ADC on a specific channel, Filtered Reading */
 extern u8 ADC_u8ReadChannelFiltered (u8 Copy_u8ChannelNum, u16* Copy_u16ADCValue) {
 	u8 Local_u8Status = u8OK;
-	if (!GET_BIT(ADC_u8ADCSRA,ADEN) || (Copy_u8ChannelNum > ADC_U8CH7)) { // ADC is Disable
+	if (!GET_BIT(ADC_u8ADCSRA,ADEN) || (Copy_u8ChannelNum > ADC_u8CH7)) { // ADC is Disable
 		Local_u8Status = u8ERROR;
 	} else {
 	u8 Local_u8LoopIndex;
