@@ -36,31 +36,31 @@
 #define UART_u32BAUD_RATE_76800   	76800UL
 #define UART_u32BAUD_RATE_115200   	115200UL
 
-/*Comment!: UART Configration Options*/
-#define UART_u8_5N1 		0x00
-#define UART_u8_6N1 		0x02
-#define UART_u8_7N1 		0x04
-#define UART_u8_8N1 		0x06
-#define UART_u8_5N2 		0x08
-#define UART_u8_6N2 		0x0A
-#define UART_u8_7N2 		0x0C
-#define UART_u8_8N2 		0x0E
-#define UART_u8_5E1 		0x20
-#define UART_u8_6E1 		0x22
-#define UART_u8_7E1 		0x24
-#define UART_u8_8E1 		0x26
-#define UART_u8_5E2 		0x28
-#define UART_u8_6E2 		0x2A
-#define UART_u8_7E2 		0x2C
-#define UART_u8_8E2 		0x2E
-#define UART_u8_5O1 		0x30
-#define UART_u8_6O1 		0x32
-#define UART_u8_7O1 		0x34
-#define UART_u8_8O1 		0x36
-#define UART_u8_5O2 		0x38
-#define UART_u8_6O2 		0x3A
-#define UART_u8_7O2 		0x3C
-#define UART_u8_8O2 		0x3E
+/*Comment!: UART Configuration Options*/
+#define UART_u8_5N1 		0x80
+#define UART_u8_6N1 		0x82
+#define UART_u8_7N1 		0x84
+#define UART_u8_8N1 		0x86
+#define UART_u8_5N2 		0x88
+#define UART_u8_6N2 		0x8A
+#define UART_u8_7N2 		0x8C
+#define UART_u8_8N2 		0x8E
+#define UART_u8_5E1 		0xA0
+#define UART_u8_6E1 		0xA2
+#define UART_u8_7E1 		0xA4
+#define UART_u8_8E1 		0xA6
+#define UART_u8_5E2 		0xA8
+#define UART_u8_6E2 		0xAA
+#define UART_u8_7E2 		0xAC
+#define UART_u8_8E2 		0xAE
+#define UART_u8_5O1 		0xB0
+#define UART_u8_6O1 		0xB2
+#define UART_u8_7O1 		0xB4
+#define UART_u8_8O1 		0xB6
+#define UART_u8_5O2 		0xB8
+#define UART_u8_6O2 		0xBA
+#define UART_u8_7O2 		0xBC
+#define UART_u8_8O2 		0xBE
 
 
 /*Comment!: RXEN: Receiver Enable */
