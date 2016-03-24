@@ -5,9 +5,9 @@
  Author: KiMo
  */
 
-#include "Utilities\Types.h"
-#include "Utilities\Delay.h"
-#include "MCAL\UART\UART_Interface.h"
+#include "..\Utilities\Types.h"
+#include "..\Utilities\Delay.h"
+#include "..\MCAL\UART\UART_Interface.h"
 
 int main(void) {
 	UART_voidInit();
