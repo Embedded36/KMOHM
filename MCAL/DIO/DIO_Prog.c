@@ -7,9 +7,9 @@
 
 #include "..\..\Utilities\Types.h"
 #include "..\..\Utilities\Util.h"
+#include "DIO_Private.h"
 #include "DIO_Config.h"
 #include "DIO_Interface.h"
-#include "DIO_Private.h"
 
 static volatile u8* const DIO_u8DDRS[NUMBER_OF_PORTS] = { DIO_u8DDRA, DIO_u8DDRB, DIO_u8DDRC, DIO_u8DDRD };
 static volatile u8* const DIO_u8PORTS[NUMBER_OF_PORTS] = { DIO_u8PORTA, DIO_u8PORTB, DIO_u8PORTC, DIO_u8PORTD };
