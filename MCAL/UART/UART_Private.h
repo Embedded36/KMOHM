@@ -15,7 +15,7 @@
 /*Comment!: ATMEGA32 UART Registers */
 #define UART_u8UCSRA		(*(volatile u8*)(0x2B))
 #define UART_u8UCSRB		(*(volatile u8*)(0x2A))
-#define UART_u8UCSRC		(*(volatile u16*)(0x40))
+#define UART_u8UCSRC		(*(volatile u8*)(0x40))
 #define UART_u8UBRRL		(*(volatile u8*)(0x29))
 #define UART_u8UBRRH		(*(volatile u8*)(0x40))
 #define UART_u8UDR			(*(volatile u8*)(0x2C))

@@ -13,7 +13,8 @@ int main(void) {
 	UART_voidInit();
 	while (1) {
 		//UART_u8TransmitOneByte("K");
-		UART_u8TransmitString("KiMo\n");
+		UART_u8TransmitString("KiMo\r\n");
+		voidDELAY_MS(1000);
 	}
 	return 0;
 }
