@@ -16,7 +16,7 @@
 
 /*Comment!: Sense Control mode for External Interrupt #0 , #1 */
 /*Range!:  EXTINT_LEVEL_LOW or EXTINT_EDGE_ANY or EXTINT_EDGE_FALLING or EXTINT_EDGE_RISING */
-#define EXTINT0_SENSE_CON_MODE          EXTINT_EDGE_ANY
+#define EXTINT0_SENSE_CON_MODE          EXTINT_EDGE_RISING
 #define EXTINT1_SENSE_CON_MODE          EXTINT_EDGE_ANY
 
 /*Comment!: Sense Control mode for External Interrupt #2 */
