@@ -8,69 +8,9 @@
 #include "Utilities\Types.h"
 #include "Utilities\Delay.h"
 #include "MCAL\DIO\DIO_Interface.h"
-//#include "HAL\74HC595\74HC595_Interface.h"
 #include "HAL\KEYPAD\KEYPAD_Interface.h"
 
-#define STEPPER_MOTOR_PIN1   	10
-#define STEPPER_MOTOR_PIN2   	11
-#define STEPPER_MOTOR_PIN3   	12
-#define STEPPER_MOTOR_PIN4   	13
 
-#define DELAY_FOR_STEPPER		1
-
-#define STEPPER_STEP_A			1
-#define STEPPER_STEP_B			2
-#define STEPPER_STEP_C			3
-#define STEPPER_STEP_D			4
-
-void StepperOFF(void) {
-	DIO_u8WritePinVal(STEPPER_MOTOR_PIN1, DIO_u8LOW);
-	DIO_u8WritePinVal(STEPPER_MOTOR_PIN2, DIO_u8LOW);
-	DIO_u8WritePinVal(STEPPER_MOTOR_PIN3, DIO_u8LOW);
-	DIO_u8WritePinVal(STEPPER_MOTOR_PIN4, DIO_u8LOW);
-}
-
-void StepperRunning(u8 KeyValue) {
-	static u8 Step = STEPPER_STEP_A; // 0,1,2,3
-	static u8 DelayCounter = 0;
-	DelayCounter++;
-	switch (Step) {
-	case STEPPER_STEP_A:
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN1, DIO_u8HIGH);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN2, DIO_u8LOW);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN3, DIO_u8LOW);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN4, DIO_u8LOW);
-		break;
-	case STEPPER_STEP_B:
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN2, DIO_u8HIGH);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN1, DIO_u8LOW);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN3, DIO_u8LOW);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN4, DIO_u8LOW);
-		break;
-	case STEPPER_STEP_C:
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN3, DIO_u8HIGH);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN1, DIO_u8LOW);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN2, DIO_u8LOW);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN4, DIO_u8LOW);
-		break;
-	case STEPPER_STEP_D:
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN4, DIO_u8HIGH);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN1, DIO_u8LOW);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN2, DIO_u8LOW);
-		DIO_u8WritePinVal(STEPPER_MOTOR_PIN3, DIO_u8LOW);
-		break;
-	default:
-		break;
-	}
-	if (DelayCounter > (DELAY_FOR_STEPPER * KeyValue)) {
-		DelayCounter = 0;
-		if (Step == STEPPER_STEP_D)
-			Step = STEPPER_STEP_A;
-		else {
-			Step++;
-		}
-	}
-}
 
 int main(void) {
 	//u8 Local_u8SwitchValue; //To store the switch value
