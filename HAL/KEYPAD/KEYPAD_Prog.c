@@ -44,10 +44,10 @@ extern void KEYPAD_voidInit(void) {
 	/*
 	 for(ColumnRow_Index=0;ColumnRow_Index<4;ColumnRow_Index++)
 	 {
-	 //Intialization for Columns
+	 //Initialization for Columns
 	 DIO_u8WritePinDir(KEYPAD_Column[ColumnRow_Index], DIO_u8OUTPUT);
 	 DIO_u8WritePinVal(KEYPAD_Column[ColumnRow_Index], DIO_u8HIGH);
-	 //Intialization for Rows Direction input & active pullup resistor
+	 //Initialization for Rows Direction input & active pullup resistor
 	 DIO_u8WritePinDir(KEYPAD_Row[ColumnRow_Index], DIO_u8INPUT);
 	 DIO_u8WritePinVal(KEYPAD_Row[ColumnRow_Index], DIO_u8HIGH);
 	 }
