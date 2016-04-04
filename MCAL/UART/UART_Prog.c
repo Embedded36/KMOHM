@@ -14,13 +14,14 @@
 
 /*Comment!: UART Initialization */
 extern void UART_voidInit(void){
+	// Adjust the BaudRate
 	UART_u8UBRRH = (UART_u16UBRR_VALUE>>8);
 	UART_u8UBRRL = UART_u16UBRR_VALUE;
 	//UART_voidEnable();  
 	//UART_u8UCSRA = 0; //UART_u8CONFIGURATION;
-	SET_BIT(UART_u8UCSRB,RXEN);
-	SET_BIT(UART_u8UCSRB,TXEN);
-	UART_u8UCSRC = UART_u8CONFIGURATION;
+	SET_BIT(UART_u8UCSRB,RXEN); //Enable Rx
+	SET_BIT(UART_u8UCSRB,TXEN);	//Enable Tx
+	UART_u8UCSRC = UART_u8CONFIGURATION; //Assign the desired configuration
 	return;
 }
 /*Comment!: UART Enable */

@@ -39,11 +39,10 @@ int main(void) {
 	u8 Local_u8WhichLed = REDLED;
 	DIO_voidInit();
 	EXTINT_voidInit();
-	EXTINT_u8AttachInt(EXTINT0, ToggleLedStatus);
 	__asm__("SEI");
 	TIMER0_voidInit();
 	KEYPAD_voidInit();
-
+	EXTINT_u8AttachInt(EXTINT0, ToggleLedStatus);
 	while (1) {
 		switch (Local_u8WhichLed) {
 		case REDLED:
