@@ -23,11 +23,9 @@ extern void SPI_voidInit(void);
 extern void SPI_voidEnable(void);
 /*Comment!: SPI Disable */
 extern void SPI_voidDisable(void);
-/*Comment!: Read SPI on a specific channel, just one shot */
-extern u8 SPI_u8TransmitOneByte(u8 Copy_u8Data);
-/*Comment!: Read SPI on a specific channel, Filtered Reading */
-extern u8 SPI_u8ReceiveOneByte(u8 *Copy_u8Data);
-/*Comment!: Read SPI on a specific channel, Filtered Reading */
-extern u8 SPI_u8TransmitString(u8 *Copy_u8String);
+/*Comment!: Transmit & Receive One Byte to/From the SPI*/
+extern u8 SPI_u8Transfer(u8 Copy_u8TxData, u8 *Copy_u8RxData);
+/*Comment!:  Transmit & Receive a String to/From the SPI*/
+extern u8 SPI_u8TransferString(u8 *Copy_u8TxString, u8 *Copy_u8RxString);
 
 #endif /* _SPI_INTERFACE_H_ */

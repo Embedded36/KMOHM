@@ -12,18 +12,37 @@
 /***************** Public Definitions  *****************/
 /*******************************************************/
 
-/*Comment!:  CPU frequency  */
-#define F_OSC	4000000UL
+/*Comment!: SPI Initial State*/
+/*Range!: SPI_DISABLE or SPI_ENABLE */
+#define SPI_INITSTATE				SPI_ENABLE
 
-/*Comment!:  Voltage Reference Selection For SPI */
-/*Range!  : SPI_u8AREF or SPI_u8AVCC or SPI_u8INTERNAL */
-#define SPI_u32BAUD_RATE			SPI_u32BAUD_RATE_9600	
+/*Comment!: SPI Interrupts */
+/*Range!: SPI_DISABLE or SPI_ENABLE */
+#define SPI_INT						SPI_DISABLE
 
-/*Comment!: SPI Configuration Options*/
-/*Range!  : SPI_u8_5N1 or SPI_u8_6N1 or SPI_u8_7N1 or SPI_u8_8N1 or SPI_u8_5N2 or SPI_u8_6N2 or SPI_u8_7N2 or SPI_u8_8N2
-			SPI_u8_5E1 or SPI_u8_6E1 or SPI_u8_7E1 or SPI_u8_8E1 or SPI_u8_5E2 or SPI_u8_6E2 or SPI_u8_7E2 or SPI_u8_8E2
-			SPI_u8_5O1 or SPI_u8_6O1 or SPI_u8_7O1 or SPI_u8_8O1 or SPI_u8_5O2 or SPI_u8_6O2 or SPI_u8_7O2 or SPI_u8_8O2*/
-#define SPI_u8CONFIGURATION		SPI_u8_8N1	
+/*Comment!: SPI Data Order */
+/*Range!: SPI_MSB or SPI_LSB */
+#define SPI_DATA_ORDER				SPI_MSB
+
+/*Comment!: SPI Master/Slave Mode*/
+/*Range!: SPI_MASTER or SPI_SLAVE */
+#define SPI_MASTER_SLAVE_MODE		SPI_MASTER
+
+/*
+Mode Conditions 	Leading Edge 		Trailing Edge
+ 0 	CPOL=0,CPHA=0 	read on rising 		change on falling
+ 1 	CPOL=0,CPHA=1 	change on rising 	read on falling
+ 2 	CPOL=1,CPHA=0 	read on falling 	change on rising
+ 3 	CPOL=1,CPHA=1 	change on falling 	read on rising
+*/
+
+/*Comment!: SPI Data Mode*/
+/*Range!  : SPI_MODE0 or SPI_MODE1 or SPI_MODE2 or SPI_MODE3*/
+#define SPI_DATA_MODE		SPI_MODE0
+
+/*Comment!: SPI Default Prescaler */
+/*Range!: SPI_CLOCK_DIV4 or SPI_CLOCK_DIV16 or SPI_CLOCK_DIV64 or SPI_CLOCK_DIV128 or SPI_CLOCK_DIV2 or SPI_CLOCK_DIV8 or SPI_CLOCK_DIV32 */
+#define SPI_PRESCALE          SPI_CLOCK_DIV16
 
 
 
