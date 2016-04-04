@@ -23,7 +23,10 @@
 
 /*Comment!: Initialization Function for EXTINTs*/
 extern void EXTINT_voidInit(void);
-
+/*Comment!: EXTINT0 Enable */
+extern u8 EXTINT_voidEnable(u8 Copy_ExtInterrupt);
+/*Comment!: SPI Disable */
+extern u8 EXTINT_voidDisable(u8 Copy_ExtInterrupt);
 /* EXTINT_u8AttachInt and EXTINT_u8DetachInt commands
               These functions allow the attachment (or detachment) of any user
               function to an external interrupt.  "Attaching" one of your own
@@ -41,7 +44,6 @@ extern void EXTINT_voidInit(void);
               void myInterruptHandler(void) { ... }*/
 /*Comment!: "Attaching" one of your own functions to an interrupt means that it will be called whenever that interrupt is triggered*/
 u8 EXTINT_u8AttachInt(u8 Copy_ExtInterrupt, void (*UserFunc)(void));
-
 /*Comment!: Remove the association and executes no user function when the interrupt occurs*/
 u8 EXTINT_u8DetachInt(u8 Copy_ExtInterrupt);
 

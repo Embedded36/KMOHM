@@ -25,7 +25,7 @@ volatile static voidFuncPtr EXTINT_IntFunc[EXTINT_NUM_INTERRUPTS];
 /*Comment!: Initialization Function for EXTINTs*/
 extern void EXTINT_voidInit(void) {
 	//__asm__("SEI");
-
+//External Interrupt 0
 #if (EXTINT0_INITSTATE == EXTINT_ENABLE)
 	SET_BIT(EXTINT_u8GICR, INT0);
 #if(EXTINT0_SENSE_CON_MODE == EXTINT_LEVEL_LOW || EXTINT0_SENSE_CON_MODE == EXTINT_EDGE_ANY || EXTINT0_SENSE_CON_MODE == EXTINT_EDGE_FALLING || EXTINT0_SENSE_CON_MODE == EXTINT_EDGE_RISING)
@@ -39,6 +39,7 @@ extern void EXTINT_voidInit(void) {
 #warning "You put a wrong state for ExtInt0 so the default state is OFF"
 #endif
 
+//External Interrupt 1
 #if (EXTINT1_INITSTATE == EXTINT_ENABLE)
 	SET_BIT(EXTINT_u8GICR,INT1);
 #if(EXTINT1_SENSE_CON_MODE == EXTINT_LEVEL_LOW || EXTINT1_SENSE_CON_MODE == EXTINT_EDGE_ANY || EXTINT1_SENSE_CON_MODE == EXTINT_EDGE_FALLING || EXTINT1_SENSE_CON_MODE == EXTINT_EDGE_RISING)
@@ -63,9 +64,47 @@ extern void EXTINT_voidInit(void) {
 #endif
 #elif (EXTINT2_INITSTATE == EXTINT_DISABLE)
 #else
-#warning "You put worng state for ExtInt2 so the default state is OFF"
+#warning "You put wrong state for ExtInt2 so the default state is OFF"
 #endif
 	return;
+}
+/*Comment!: EXTINT0 Enable */
+extern u8 EXTINT_voidEnable(u8 Copy_ExtInterrupt) {
+	u8 Local_u8Status = u8OK;
+	switch (Copy_ExtInterrupt) {
+	case EXTINT0:
+		SET_BIT(EXTINT_u8GICR, INT0);
+		break;
+	case EXTINT1:
+		SET_BIT(EXTINT_u8GICR, INT1);
+		break;
+	case EXTINT2:
+		SET_BIT(EXTINT_u8GICR, INT2);
+		break;
+	default: // make sure the interrupt number is within bounds
+		Local_u8Status = u8ERROR;
+		break;
+	}
+	return Local_u8Status;
+}
+/*Comment!: SPI Disable */
+extern u8 EXTINT_voidDisable(u8 Copy_ExtInterrupt) {
+	u8 Local_u8Status = u8OK;
+	switch (Copy_ExtInterrupt) {
+	case EXTINT0:
+		CLR_BIT(EXTINT_u8GICR, INT0);
+		break;
+	case EXTINT1:
+		CLR_BIT(EXTINT_u8GICR, INT1);
+		break;
+	case EXTINT2:
+		CLR_BIT(EXTINT_u8GICR, INT2);
+		break;
+	default: // make sure the interrupt number is within bounds
+		Local_u8Status = u8ERROR;
+		break;
+	}
+	return Local_u8Status;
 }
 
 // EXTINT_u8AttachInt and EXTINT_u8DetachInt commands
@@ -83,7 +122,6 @@ extern void EXTINT_voidInit(void) {
 //              myInterruptFunction must be defined with no return value and no arguments:
 //
 //              void myInterruptHandler(void) { ... }
-
 /*Comment!: "Attaching" one of your own functions to an interrupt means that it will be called whenever that interrupt is triggered*/
 u8 EXTINT_u8AttachInt(u8 Copy_ExtInterrupt, void (*UserFunc)(void)) {
 	u8 Local_u8Status = u8OK;
@@ -97,7 +135,6 @@ u8 EXTINT_u8AttachInt(u8 Copy_ExtInterrupt, void (*UserFunc)(void)) {
 	}
 	return Local_u8Status;
 }
-
 /*Comment!: Remove the association and executes no user function when the interrupt occurs*/
 u8 EXTINT_u8DetachInt(u8 Copy_ExtInterrupt) {
 	u8 Local_u8Status = u8OK;
@@ -111,7 +148,6 @@ u8 EXTINT_u8DetachInt(u8 Copy_ExtInterrupt) {
 	}
 	return Local_u8Status;
 }
-
 /*Comment!: ISR for EXTINT0_vect*/
 ISR(INT0_vect) {
 	// if a user function is defined, execute it
@@ -119,7 +155,6 @@ ISR(INT0_vect) {
 		EXTINT_IntFunc[EXTINT0]();
 	}
 }
-
 /*Comment!: ISR for EXTINT1_vect*/
 ISR(INT1_vect) {
 	// if a user function is defined, execute it
@@ -127,7 +162,6 @@ ISR(INT1_vect) {
 		EXTINT_IntFunc[EXTINT1]();
 	}
 }
-
 /*Comment!: ISR for EXTINT2_vect*/
 ISR(INT2_vect) {
 	// if a user function is defined, execute it
