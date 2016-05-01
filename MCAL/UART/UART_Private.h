@@ -63,83 +63,19 @@
 #define UART_u8_8O2 		0xBE
 
 
-
-/* UART Status Register Bit Definitions */
-// USART Control and Status Register A – UCSRA
-/*Comment!: UART Receive Complete */
-#define RXC		7
-/*Comment!: UART Transmit Complete */
-#define TXC		6
+/*Comment!: RXEN: Receiver Enable */
+#define RXEN				4
+/*Comment!: TXEN: Transmitter Enable */
+#define TXEN				3
 /*Comment!: UART Data Register Empty */
-#define UDRE	5
-/*Comment!: UART Frame Error */
-#define FE		4
-/*Comment!: UART Data OverRun */
-#define OVR		3
-/*Comment!: UART Parity Error */
-#define PE		2
-/*Comment!: UART Double the USART Transmission Speed */
-#define U2X		1
-/*Comment!: UART Multi-processor Communication Mode */
-#define MPCM	0
+#define UDRE				5
+/*Comment!: UART Receive Complete */
+#define RXC					7
 
-//USART Control and Status Register B – UCSRB
-/*Comment!: UART RX Complete Interrupt Enable */
-#define RXCIE 7
-/*Comment!: UART TX Complete Interrupt Enable */
-#define TXCIE 6
-/*Comment!: UART Data Register Empty Interrupt Enable */
-#define UDRIE 5
-/*Comment!: UART Receiver Enable */
-#define RXEN 4
-/*Comment!: UART Transmitter Enable */
-#define TXEN 3
-/*Comment!: UART Character Size */
-#define UCSZ2 2
-/*Comment!: UART Receive Data Bit 8 */
-#define RXB8 1
-/*Comment!: UART Transmit Data Bit 8 */
-#define TXB8 0
-
-
-//USART Control and Status Register C – UCSRC
-/*Comment!: UART Register Select between accessing the UCSRC or the UBRRH Register*/
-#define URSEL 7
-/*Comment!: USART Mode Select Asynchronous or Synchronous*/
-#define UMSEL 6
-/*Comment!: UART Parity Mode */
-#define UPM1 5
-/*Comment!: UART Parity Mode */
-#define UPM0 4
-/*Comment!: UART Stop Bit Select */
-#define USBS 3
-/*Comment!: UART Character Size */
-#define UCSZ1 2
-/*Comment!: UART Character Size */
-#define UCSZ0 1
-/*Comment!: UART Clock Polarity */
-#define UCPOL 0
-
-
-/* USART, Rx Complete */
-#define USART_RXC_vect			__vector_13
-/* USART Data Register Empty */
-#define USART_UDRE_vect			__vector_14
-/* USART, Tx Complete */
-#define USART_TXC_vect			__vector_15
 
 /*******************************************************/
 /***************** Private Functions *******************/
 /*******************************************************/
-#define ISR(vector, ...) \
-	void vector(void) __attribute__ ((signal,used,externally_visible)) __VA_ARGS__;\
-	void vector(void)
-
-/** @brief  UART Baudrate Expression
- *  @param  xtalCpu  system clock in Mhz, e.g. 4000000L for 4Mhz          
- *  @param  baudRate baudrate in bps, e.g. 1200, 2400, 9600     
- */
-#define UART_BAUD_SELECT(baudRate,xtalCpu) (((xtalCpu)+8UL*(baudRate))/(16UL*(baudRate))-1UL)
 
 
 #endif /* _UART_PRIVATE_H_ */
