@@ -24,8 +24,8 @@
 //#define ADC_u8VBG		30 //or 1E
 
 /*Comment!: Digital I/O Direction*/
-#define ADC_u8INPUT		0
-#define ADC_u8OUTPUT	1
+#define ADC_u8VREF			5
+#define ADC_u16RESULOTION	1024
 
 /*******************************************************/
 /***************** Public Functions ********************/
@@ -40,8 +40,8 @@ extern void ADC_voidDisable(void);
 /*Comment!: Read ADC on a specific channel, just one shot */
 extern u8 ADC_u8ReadChannel(u8 Copy_u8ChannelNum, u16* Copy_u16ADCValue);
 /*Comment!: Read ADC on a specific channel, Filtered Reading */
-extern u8 ADC_u8ReadChannelFiltered (u8 Copy_u8ChannelNum, u16* Copy_u16ADCValue);
-/*Comment!: Read ADC on a specific channel, just one shot */
-//extern u8 ADC_u8ReadGroup(u8 Copy_u8GroupNum, u16* Copy_u16ADCValue);
+extern u8 ADC_u8ReadChannelFiltered (u8 Copy_u8ChannelNum, u16* Copy_u16ADCFilteredValue);
+/*Comment!: Read ADC values for a specific Groups (4 channels)*/
+//extern u8 ADC_u8ReadGroup(u8 Copy_u8GroupNum, u16* Copy_u16ADCValue); // Need to be implemented
 
 #endif /* _ADC_INTERFACE_H_ */

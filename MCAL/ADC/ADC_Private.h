@@ -17,19 +17,19 @@
 #define ADC_u8ADCSRA	(*(volatile u8*)(0x26))
 #define ADC_u8ADCH		(*(volatile u8*)(0x25))
 #define ADC_u8ADCL		(*(volatile u8*)(0x24))
-#define ADC_u8ADC		(*(volatile u16*)(0x24))
+#define ADC_u16ADC		(*(volatile u16*)(0x24))
 /*Comment!: ADC Filtered Configuration options*/
-#define ADC_u8Num0			0	
-#define ADC_u8Num1			1	
-#define ADC_u8Num2			2	
-#define ADC_u8Num3			3	
-#define ADC_u8Num4			4	
-#define ADC_u8Num5			5	
-#define ADC_u8Num6			6	
-#define ADC_u8Num7			7	
-#define ADC_u8Num8			8	
-#define ADC_u8Num9			9	
-#define ADC_u8Num10			10
+#define ADC_u8NUM0			0	
+#define ADC_u8NUM1			1	
+#define ADC_u8NUM2			2	
+#define ADC_u8NUM3			3	
+#define ADC_u8NUM4			4	
+#define ADC_u8NUM5			5	
+#define ADC_u8NUM6			6	
+#define ADC_u8NUM7			7	
+#define ADC_u8NUM8			8	
+#define ADC_u8NUM9			9	
+#define ADC_u8NUM10			10
 
 /*Comment!: ADC Enable Bit Number */
 #define ADEN		7

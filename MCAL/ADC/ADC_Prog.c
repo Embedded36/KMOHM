@@ -15,6 +15,8 @@
 extern void ADC_voidInit(void) {
 	ADC_u8ADMUX = ADC_u8ADMUX_VALUE;
 	ADC_u8ADCSRA = ADC_u8ADCSRA_VALUE;
+	
+	SET_BIT(ADC_u8ADCSRA,ADEN);
 	return;
 }
 
@@ -39,31 +41,32 @@ extern u8 ADC_u8ReadChannel(u8 Copy_u8ChannelNum, u16* Copy_u16ADCValue) {
 	ADC_u8ADMUX = ((ADC_u8ADMUX & 0xE0) | Copy_u8ChannelNum); // clears the bottom 3 bits before ORing
 	SET_BIT(ADC_u8ADCSRA,ADSC);	// Start the ADC conversion
     while(GET_BIT(ADC_u8ADCSRA,ADSC));      // waits for the ADC to finish 
-//    *Copy_u16ADCValue = ADC_u8ADCL;
-//    *Copy_u16ADCValue = (ADC_u8ADCH << 8) + *Copy_u16ADCValue;    // ADCH is read so ADC can be updated again
-    *Copy_u16ADCValue = ADC_u8ADC;
+    //*Copy_u16ADCValue = ADC_u8ADCL;
+    //*Copy_u16ADCValue = (ADC_u8ADCH << 8) + *Copy_u16ADCValue;    // ADCH is read so ADC can be updated again
+    *Copy_u16ADCValue = ADC_u16ADC;
 	}
 	return Local_u8Status;
 }
 
 /*Comment!: Read ADC on a specific channel, Filtered Reading */
-extern u8 ADC_u8ReadChannelFiltered (u8 Copy_u8ChannelNum, u16* Copy_u16ADCValue) {
+extern u8 ADC_u8ReadChannelFiltered (u8 Copy_u8ChannelNum, u16* Copy_u16ADCFilteredValue) {
 	u8 Local_u8Status = u8OK;
 	if (!GET_BIT(ADC_u8ADCSRA,ADEN) || (Copy_u8ChannelNum > ADC_u8CH7)) { // ADC is Disable
 		Local_u8Status = u8ERROR;
 	} else {
 	u8 Local_u8LoopIndex;
 	u16 Local_u16TempADCValue;
-	*Copy_u16ADCValue=ADC_u8Num0;
-	ADC_u8ADMUX = ((ADC_u8ADMUX & 0xE0) | Copy_u8ChannelNum); // clears the bottom 3 bits before ORing
-	for(Local_u8LoopIndex=ADC_u8Num0;Local_u8LoopIndex<ADC_u8FilteredItertion;Local_u8LoopIndex++){
-	SET_BIT(ADC_u8ADCSRA,ADSC);	// Start the ADC conversion
-    while(GET_BIT(ADC_u8ADCSRA,ADSC));      // waits for the ADC to finish 
-    Local_u16TempADCValue = ADC_u8ADCL;
-    Local_u16TempADCValue = (ADC_u8ADCH << 8) + Local_u16TempADCValue;    // ADCH is read so ADC can be updated again
-	*Copy_u16ADCValue += Local_u16TempADCValue;
+	*Copy_u16ADCFilteredValue=ADC_u8CH0; // clear the variable
+	// ADC_u8ADMUX = ((ADC_u8ADMUX & 0xE0) | Copy_u8ChannelNum); // clears the bottom 3 bits before ORing
+	for(Local_u8LoopIndex=ADC_u8NUM0;Local_u8LoopIndex<ADC_u8FILTEREDITERTION;Local_u8LoopIndex++){
+	// SET_BIT(ADC_u8ADCSRA,ADSC);	// Start the ADC conversion
+    // while(GET_BIT(ADC_u8ADCSRA,ADSC));      // waits for the ADC to finish 
+    // Local_u16TempADCValue = ADC_u8ADCL;
+    // Local_u16TempADCValue = (ADC_u8ADCH << 8) + Local_u16TempADCValue;    // ADCH is read so ADC can be updated again
+	ADC_u8ReadChannel(Copy_u8ChannelNum, &Local_u16TempADCValue);
+	*Copy_u16ADCFilteredValue += Local_u16TempADCValue;
 	}
-		*Copy_u16ADCValue /=ADC_u8FilteredItertion;
+		*Copy_u16ADCFilteredValue /=ADC_u8FILTEREDITERTION;
 	}
 	return Local_u8Status;
 }

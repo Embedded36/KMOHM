@@ -73,6 +73,6 @@ input clock frequency to the ADC can be higher than 200kHz to get a higher sampl
 
 /*Comment!: ADC Filtered Configration, take number of ADC reading from the same channel them return the average*/
 /*Range!  : ADC_u8Num1 : ADC_u8Num10*/
-#define ADC_u8FilteredItertion			ADC_u8Num5
+#define ADC_u8FILTEREDITERTION			ADC_u8NUM5
 
 #endif /* _ADC_CONFIG_H_ */
