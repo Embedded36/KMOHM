@@ -24,27 +24,23 @@ Here we will use OCM
 #include "..\MCAL\DIO\DIO_Interface.h"
 #include "..\MCAL\ADC\ADC_Interface.h"
 #include "..\MCAL\TIMER\TIMER_Interface.h"
-//#include <avr/io.h>
-
-#define Timer0_Prescaller	1UL
-#define Timefor38KHzInuS	((1000UL/38UL)*(clockCyclesPerMicrosecond)/(Timer0_Prescaller))
-
 
 int main(void) {
 	u16 Local_u16ADCValue;
 	u16 Local_u16ADCValueP;
-	//DIO_voidInit();
+	u8 Local_u8PWMValue;
+	DIO_voidInit();
 	ADC_voidInit();
-	TIMER0_voidInit();
+	TIMER0_voidSetOCR(255);
+	TIMER0_voidInit(); //TIMER0_FAST_PWM , TIMER0_COM2
 	//Enable_Global_INT(); // enable global interrupt
 	while (1) {
-//		ADC_u8ReadChannel(ADC_u8CH0, &Local_u16ADCValue);
-//		if (Local_u16ADCValue != Local_u16ADCValueP) {
-//			percentvalue = Local_u16ADCValue/1023.00 * 100 ;
-//			OnTime = percentvalue*Timefor38KHzInuS/100;
-//			OffTime = Timefor38KHzInuS - OnTime;
-//			Local_u16ADCValueP = Local_u16ADCValue;
-//		}
+		ADC_u8ReadChannel(ADC_u8CH0, &Local_u16ADCValue);
+		if (Local_u16ADCValue != Local_u16ADCValueP) {
+			Local_u8PWMValue = u8 (Local_u16ADCValue>>2) ;
+			TIMER0_voidSetOCR(Local_u8PWMValue);
+			Local_u16ADCValueP = Local_u16ADCValue;
+		}
 	}
 	return 0;
 }
