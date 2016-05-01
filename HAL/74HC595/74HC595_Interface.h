@@ -19,8 +19,7 @@
 /*******************************************************/  
 /*****************  Public Functions  ******************/  
 /*******************************************************/  
-  
-  
+
 /*Comment!: Sends a clock pulse on SH_CP line*/
 extern u8 HC595_u8ShiftPulse(u8 Copy_u8DeviceIdx);
 /*Comment!: Sends a clock pulse on ST_CP line*/
