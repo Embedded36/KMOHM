@@ -42,14 +42,14 @@
 /***************** Public Functions ********************/
 /*******************************************************/
 
+//need to enable the global interrupt
+
 /*Comment!: Initialization Function for Timer0*/
 extern void TIMER0_voidInit(void);
 /*Comment!: TIMER0 Enable */
 extern void TIMER0_voidEnable(void);//need to be implemented
 /*Comment!: TIMER0 Disable */
 extern void TIMER0_voidDisable(void);//need to be implemented
-/*Comment!: Function to Reset timer0 */
-//void TIMER0_voidReset(void);
 /*Comment!: Function to Set Output Compare Register for timer0 */
 extern void TIMER0_voidSetOCR(u8 Copy_u8OCRValue);
 /*Comment!: Function to return MicroSeconds since the MCU powered up*/

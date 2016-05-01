@@ -30,7 +30,7 @@
 
 /*Comment!: Default Prescale Settings For Timer 0 */
 /*Range!: TIMER0_CLK_STOP or TIMER0_CLK_DIV1 or TIMER0_CLK_DIV8  or TIMER0_CLK_DIV64 or TIMER0_CLK_DIV256 or TIMER0_CLK_DIV1024or TIMER0_CLK_T0_FALLor TIMER0_CLK_T0_RISE */
-#define TIMER0_PRESCALE					TIMER0_CLK_DIV1
+#define TIMER0_PRESCALE					TIMER0_CLK_DIV64
 
 /*Comment!: Operation mode for Timer 0 */
 /*Range!: TIMER0_NORMAL or TIMER0_PWM_PHASE_CORRECT or TIMER0_CTC or TIMER0_FAST_PWM */
@@ -64,12 +64,12 @@
  TIMER0_COM3		Set OC0 on compare match, clear OC0 at BOTTOM,(inverting mode)
  ******************************************************************************************************
  */
-#define TIMER0_COMPARE_OUTPUT_MODE		TIMER0_COM0
+#define TIMER0_COMPARE_OUTPUT_MODE		TIMER0_COM1
 
 /*Comment!: Timer Interrupts */
 /*Range!: TIMER_DISABLE or TIMER_ENABLE */
-#define TIMER0_OVERFLOW_INT				TIMER_DISABLE
-#define TIMER0_OUTCOMPARE_INT			TIMER_ENABLE
+#define TIMER0_OVERFLOW_INT				TIMER_ENABLE
+#define TIMER0_OUTCOMPARE_INT			TIMER_DISABLE
 #define TIMER1_OVERFLOW_INT				TIMER_DISABLE
 #define TIMER1_OUTCOMPAREB_INT			TIMER_DISABLE
 #define TIMER1_OUTCOMPAREA_INT			TIMER_DISABLE

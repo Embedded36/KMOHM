@@ -32,12 +32,11 @@ static volatile u32 Timer0_Millis;
 
 /*Comment!: Initialization Function for Timer0*/
 extern void TIMER0_voidInit(void) {
-	TIMER_u8TCCR0 = TIMER_u8TCCR0_VALUE; //set up timer with selected prescaler
 	TIMER_u8TCNT0 = 0x00; // // initialize counter
 #if (TIMER_u8TIMSK_VALUE !=0b00000000)
 	TIMER_u8TIMSK = TIMER_u8TIMSK_VALUE; //// enable overflow interrupt
-	//__asm__("SEI");
 #endif
+	TIMER_u8TCCR0 = TIMER_u8TCCR0_VALUE; //set up timer with selected prescaler
 	return;
 }
 
@@ -46,13 +45,6 @@ extern void TIMER0_voidEnable(void){}
 
 /*Comment!: TIMER0 Disable */
 extern void TIMER0_voidDisable(void){}
-
-/*Comment!: Function to Reset timer0 
-void TIMER0_voidReset(void){
-
-	return;
-}
-*/
 
 /*Comment!: Function to Set Output Compare Register for timer0 */
 extern void TIMER0_voidSetOCR(u8 Copy_u8OCRValue){
