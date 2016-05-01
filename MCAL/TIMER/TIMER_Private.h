@@ -8,12 +8,16 @@
 #ifndef TIMER_PRIVATE_H_
 #define TIMER_PRIVATE_H_
 
+#include "..\..\Utilities\SystemClock.h"
+
 /*******************************************************/
 /***************** Private Definitions  ****************/
 /*******************************************************/
 
+#define Timer0_Prescale				(1UL)
 
 /*Comment!: ATMEGA32 TIMERS Registers */
+#define TIMER_u8SREG			*((volatile u8*)(0x5F))
 #define TIMER_u8TIMSK			*((volatile u8*)(0x59))
 /* Timer 0 */
 #define TIMER_u8TCCR0			*((volatile u8*)(0x53))
@@ -50,62 +54,76 @@
 #define TIMER0_CLK_T0_RISE               111
 
 /*Comment!: Timer0 Operating Modes*/
-#define TIMER0_NORMAL                  	0x00
-#define TIMER0_PWM_PHASE_CORRECT       	0x01
-#define TIMER0_CTC                     	0x02
-#define TIMER0_FAST_PWM                	0x03
+#define TIMER0_NORMAL                  	00
+#define TIMER0_PWM_PHASE_CORRECT       	01
+#define TIMER0_CTC                     	10 //Timer on Compare Match
+#define TIMER0_FAST_PWM                	11
 
-/*
-
-Compare Output Mode, non-PWM Mode (normal or CTC mode)
-COM01 COM00 Description
-0 		0 	Normal port operation, OC0 disconnected.
-0 		1 	Toggle OC0 on compare match
-1 		0 	Clear OC0 on compare match
-1 		1 	Set OC0 on compare match
-******************************************************************************************************
-Compare Output Mode, Phase Correct PWM Mode
-COM01 COM00 Description
-0 		0	Normal port operation, OC0 disconnected.
-0 		1	Reserved
-1 		0	Clear OC0 on compare match when up-counting. Set OC0 on compare match when downcounting.
-1 		1 	Set OC0 on compare match when up-counting. Clear OC0 on compare match when downcounting.
-******************************************************************************************************
-Compare Output Mode, Fast PWM Mode(1)
-COM01 COM00 Description
-0 		0 	Normal port operation, OC0 disconnected.
-0 		1 	Reserved
-1 		0 	Clear OC0 on compare match, set OC0 at BOTTOM,(nin-inverting mode)
-1 		1 	Set OC0 on compare match, clear OC0 at BOTTOM,(inverting mode)
-******************************************************************************************************
-
-*/
+/*Comment!: Compare Output Modes for Timer0*/
+#define TIMER0_COM0                  	00
+#define TIMER0_COM1    				   	01 //not in Phase Correct PWM Mode & Fast PWM Mode(1)
+#define TIMER0_COM2    				   	10
+#define TIMER0_COM3    				   	11
 
 /*Comment!: Adjusting the value of Timer0 control register*/
+#define FOC0_VALUE		0
 #if (TIMER0_OPERATING_MODE==TIMER0_NORMAL)
-	#define WGM00_VALUE	 0	
 	#define WGM01_VALUE	 0
-	#define COM0_VALUE	 00 //Compare Output Mode for Timer 0
-	#define FOC0_VALUE	 0
-#elif (TIMER0_OPERATING_MODE==TIMER0_PWM_PHASE_CORRECT)
-	#define WGM00_VALUE	 1
-	#define WGM01_VALUE	 0
-#elif (TIMER0_OPERATING_MODE==TIMER0_CTC)
 	#define WGM00_VALUE	 0
-	#define WGM01_VALUE	 1
-#elif (TIMER0_OPERATING_MODE==TIMER0_FAST_PWM)	
+	#if( (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM0) || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM1) || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM2)  || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM3))
+		#define COM0_VALUE	TIMER0_COMPARE_OUTPUT_MODE
+	#else
+		#warning "The default COMPARE_OUTPUT_MODE for Timer0 is Mode0 as you chose a wrong mode"
+		#define COM0_VALUE	00
+	#endif
+	
+#elif (TIMER0_OPERATING_MODE==TIMER0_PWM_PHASE_CORRECT)
+	#define WGM01_VALUE	 0
 	#define WGM00_VALUE	 1
+	#if( (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM0) || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM2)  || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM3))
+		#define COM0_VALUE	TIMER0_COMPARE_OUTPUT_MODE
+	#else
+		#warning "The default COMPARE_OUTPUT_MODE for Timer0 is Mode0 as you chose a wrong mode"
+		#define COM0_VALUE	00
+	#endif
+	
+#elif (TIMER0_OPERATING_MODE==TIMER0_CTC)
 	#define WGM01_VALUE	 1
+	#define WGM00_VALUE	 0
+	#if( (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM0) || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM1) || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM2)  || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM3))
+		#define COM0_VALUE	TIMER0_COMPARE_OUTPUT_MODE
+	#else
+		#warning "The default COMPARE_OUTPUT_MODE for Timer0 is Mode0 as you chose a wrong mode"
+		#define COM0_VALUE	00
+	#endif
+	
+#elif (TIMER0_OPERATING_MODE==TIMER0_FAST_PWM)	
+	#define WGM01_VALUE	 1
+	#define WGM00_VALUE	 1
+	#if( (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM0) || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM2)  || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM3))
+		#define COM0_VALUE	TIMER0_COMPARE_OUTPUT_MODE
+	#else
+		#warning "The default COMPARE_OUTPUT_MODE for Timer0 is Mode0 as you chose a wrong mode"
+		#define COM0_VALUE	00
+	#endif
+	
 #else
-	#warning "The default mode is Normal as you chose wrong mode"
+	#warning "The default mode is Normal as you chose a wrong mode"
 	#define WGM00_VALUE	 0	
 	#define WGM01_VALUE	 0
+	#if( (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM0) || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM1) || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM2)  || (TIMER0_COMPARE_OUTPUT_MODE == TIMER0_COM3))
+		#define COM0_VALUE	TIMER0_COMPARE_OUTPUT_MODE
+	#else
+		#warning "The default COMPARE_OUTPUT_MODE for Timer0 is Mode0 as you chose a wrong mode"
+		#define COM0_VALUE	00
+	#endif
 #endif
 
 
 #define	TIMER_DISABLE		0
 #define	TIMER_ENABLE 		1
 
+//TIMER0_OVERFLOW_INT
 #if (TIMER0_OVERFLOW_INT==TIMER_ENABLE)	
 	#define TOIE0_VALUE	 1
 #elif (TIMER0_OVERFLOW_INT==TIMER_DISABLE)	
@@ -247,18 +265,18 @@ COM01 COM00 Description
 /***************** Private Functions *******************/
 /*******************************************************/
 
+//TCCR0 >> FOC0 WGM00 COM01 COM00 WGM01 CS02 CS01 CS00
+
 /*Comment!: Concatenate Function for TCCR1A Initial Value */
 #define CONC_HELPER_TCCR0(b7,b6,b54,b3,b210)		 0b##b7##b6##b54##b3##b210
 #define	CONC_TCCR0(b7,b6,b54,b3,b210)				 CONC_HELPER_TCCR0(b7,b6,b54,b3,b210)
 #define	TIMER_u8TCCR0_VALUE							 CONC_TCCR0(FOC0_VALUE,WGM00_VALUE,COM0_VALUE,WGM01_VALUE,TIMER0_PRESCALE)
 
-//TCCR0 >> FOC0 WGM00 COM01 COM00 WGM01 CS02 CS01 CS00
 
 /*Comment!: Concatenate Function for TIMSK Initial Value */
 #define CONC_HELPER_TIMSK(b7,b6,b5,b4,b3,b2,b1,b0)	 0b##b7##b6##b5##b4##b3##b2##b1##b0
 #define	CONC_TIMSK(b7,b6,b5,b4,b3,b2,b1,b0)			 CONC_HELPER_TIMSK(b7,b6,b5,b4,b3,b2,b1,b0)	
 #define	TIMER_u8TIMSK_VALUE							 CONC_TIMSK(OCIE2_VALUE,TOIE2_VALUE,TICIE1_VALUE,OCIE1A_VALUE,OCIE1B_VALUE,TOIE1_VALUE,OCIE0_VALUE,TOIE0_VALUE)
-
 
 #define ISR(vector, ...) \
 	void vector(void) __attribute__ ((signal,used,externally_visible)) __VA_ARGS__;\

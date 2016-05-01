@@ -48,14 +48,21 @@ extern void TIMER0_voidInit(void);
 extern void TIMER0_voidEnable(void);//need to be implemented
 /*Comment!: TIMER0 Disable */
 extern void TIMER0_voidDisable(void);//need to be implemented
+/*Comment!: Function to Reset timer0 */
+//void TIMER0_voidReset(void);
+/*Comment!: Function to Set Output Compare Register for timer0 */
+extern void TIMER0_voidSetOCR(u8 Copy_u8OCRValue);
+/*Comment!: Function to return MicroSeconds since the MCU powered up*/
+extern u32 TIMER0_u32Micros(void);
+/*Comment!: Function to return MilliSeconds since the MCU powered up*/
+extern u32 TIMER0_u32Millis(void);
+/*Comment!: Blocking Delay, Max delay 2^32 MS*/
+extern void TIMER0_voidDelayMS(u32 Copy_MS);
 /*Comment!: Set the interrupt function to run for a specific interrupt*/
-u8 TIMER_u8AttachInt(u8 Copy_u8InterruptNum, void (*UserFunc)(void));
+extern u8 TIMER_u8AttachInt(u8 Copy_u8InterruptNum, void (*UserFunc)(void));
 /*Comment!: Detach the interrupt function from a specific interrupt*/
-u8 TIMER_u8DetachInt(u8 Copy_u8InterruptNum);
-/*Comment!: Function to clear the timer0 overflow counter*/
-void TIMER0_voidClearOverflowCount(void);
-/*Comment!: Function to get the timer0 overflow counter*/
-void TIMER0_u32GetOverflowCount(u32 *Copy_u32OverflowCount);
+extern u8 TIMER_u8DetachInt(u8 Copy_u8InterruptNum);
+
 
 
 #endif /* TIMER_INTERFACE_H_ */
